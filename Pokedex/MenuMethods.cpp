@@ -2,6 +2,26 @@
 
 MenuMethods::MenuMethods()
 {
+	Pokemon newPokemon1 = Pokemon(1.0, 1.0, "Alphy", "Test Pokemon Alpha", 1);
+	Pokemon newPokemon2 = Pokemon(2.0, 2.0, "Bety", "Test Pokemon Bety", 2);
+	Pokemon newPokemon3 = Pokemon(3.0, 3.0, "Charlie", "Test Pokemon Charlie", 3);
+	Pokemon newPokemon4 = Pokemon(4.0, 4.0, "Delta", "Test Pokemon Delta", 3);
+
+	EvolvedPokemon newEvolvedPokemon1 = EvolvedPokemon(1.1, 1.1, "Ace", "Test evolved pokemon alpha",1,"Alphy");
+	EvolvedPokemon newEvolvedPokemon2 = EvolvedPokemon(2.2,2.2, "Betsy", "Test evolved pokemon alpha", 1, "Bety");
+	EvolvedPokemon newEvolvedPokemon3 = EvolvedPokemon(3.3,3.3, "Charred Charlie", "Test evolved pokemon Charlie", 1, "Charlie");
+	EvolvedPokemon newEvolvedPokemon4 = EvolvedPokemon(1.1, 1.1, "Darling", "Test evolved pokemon Delta", 1, "Delta");
+
+	pokedex.add(newPokemon1);
+	pokedex.add(newPokemon2);
+	pokedex.add(newPokemon3);
+	pokedex.add(newPokemon4);
+
+	pokedex.add(newEvolvedPokemon1);
+	pokedex.add(newEvolvedPokemon2);
+	pokedex.add(newEvolvedPokemon3);
+	pokedex.add(newEvolvedPokemon4);
+
 }
 
 void MenuMethods::createPokemon()
@@ -28,19 +48,22 @@ void MenuMethods::createPokemon()
 
 void MenuMethods::searchPokemon()
 {
-	//vector<Pokemon> foundPokemon = vector<Pokemon>();
-	//int noFound = 0;
-	//string keyword = dataEntryStr("Enter a keyword: ");
+	vector<Pokemon> foundPokemon = vector<Pokemon>();
+	int noFound = 0;
+	dataEntryStr("");
+	string keyword = dataEntryStr("Enter a keyword: ");
 
-	//for each (Pokemon aPokemon in pokedex.getItemCollection)
-	//{
-	//	if (aPokemon.getName().find(keyword) != string::npos) {
-	//		//foundPokemon.push_front(aPokemon);
-	//		foundPokemon.push_back(aPokemon);
-	//		noFound++;
-	//		cout << aPokemon.getName()<< endl;
-	//	}
-	//}
+	for each (Pokemon aPokemon in pokedex.getItemCollection())
+	{
+		if (aPokemon.getName().find(keyword) != string::npos) {
+			//foundPokemon.push_front(aPokemon);
+			foundPokemon.push_back(aPokemon);
+			noFound++;
+			cout << aPokemon.getName()<< endl;
+		}
+	}
+	string test;
+	cin >> test;
 	
 }
 
