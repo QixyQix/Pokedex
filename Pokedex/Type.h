@@ -10,7 +10,7 @@ private:
 	list<string> types;
 public:
 	Type();
-	~Type();
+	~Type(); 
 
 	int Size();
 	//Gets the size of the types string.

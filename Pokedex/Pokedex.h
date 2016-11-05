@@ -17,7 +17,7 @@ public:
 	~Pokedex();
 	//Desctructor
 
-	bool add(Pokemon& aPokemon);
+	bool add(Pokemon& const aPokemon);
 	//Adds a pokemon into the itemcollection collection.
 	//Returns a true/false
 	//True: Pokemon added successfully
@@ -28,5 +28,7 @@ public:
 	//Returns a true/false
 
 	void display(int start, int end) const;
+
+	list<Pokemon> getItemCollection();
 };
 

@@ -1,7 +1,6 @@
 #include "Pokedex.h"
 
 
-
 Pokedex::Pokedex()
 {
 }
@@ -11,7 +10,7 @@ Pokedex::~Pokedex()
 {
 }
 
-bool Pokedex::add(Pokemon& aPokemon)
+bool Pokedex::add(Pokemon& const aPokemon)
 {
 	try {
 		//Use push_front to add into the list.
@@ -35,4 +34,9 @@ bool Pokedex::edit(Pokemon & aPokemon)
 void Pokedex::display(int start, int end) const
 {
 	
+}
+
+list<Pokemon> Pokedex::getItemCollection()
+{
+	return itemCollection;
 }
