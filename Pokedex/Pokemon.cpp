@@ -5,10 +5,15 @@
 
 Pokemon::Pokemon(double h, double w, string n, string d, int c)
 {
+	//Set height
 	height = h;
+	//Set weight
 	weight = w;
+	//Set name
 	name = n;
+	//Set description
 	description = d;
+	//Category
 	category = c;
 }
 
@@ -36,11 +41,74 @@ bool Pokemon::operator!=(Pokemon & aPokemon)
 		category == aPokemon.category &&
 		(name.compare(aPokemon.name) == 0) &&
 		(description.compare(aPokemon.description) == 0));
-}
+} 
 
-string Pokemon::getName()
+string Pokemon::getName() const
 {
 	return name;
+}
+
+void Pokemon::setName(string & nm)
+{
+	name = nm;
+}
+
+string Pokemon::getDescription() const
+{
+	return description;
+}
+
+void Pokemon::setDescription(string & desc)
+{
+	description = desc;
+}
+
+double Pokemon::getWeight() const
+{
+	return weight;
+}
+
+void Pokemon::setWeight(double & w)
+{
+	weight = w;
+}
+
+double Pokemon::getheight() const
+{
+	return height;
+}
+
+void Pokemon::setheight(double & h)
+{
+	height = h;
+}
+
+int Pokemon::getCategory() const
+{
+	return category;
+}
+
+void Pokemon::setCategory(int & cat)
+{
+	category = cat;
+}
+
+string Pokemon::getEvolvedFrom() const
+{
+	return "";
+}
+
+void Pokemon::setEvolvedFrom()
+{
+}
+
+void Pokemon::edit(double & h, double & w, string & n, string & d, int& c)
+{
+	height = h; //Set height
+	weight = w; //Set weight
+	name = n; //Set name
+	description = d; //Set description
+	category = c; //Set category
 }
 
 ostream & operator<<(ostream & osObject, const Pokemon & aPokemon)
