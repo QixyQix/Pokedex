@@ -3,6 +3,7 @@
 #include <list>
 #include <string>
 #include <deque>
+#include <vector>
 #include <algorithm>
 #include "Pokemon.h"
 
@@ -11,7 +12,7 @@ using namespace std;
 class Pokedex
 {
 private:
-	deque<Pokemon> itemCollection;
+	vector<Pokemon> itemCollection;
 public:
 	Pokedex();
 	//Constructor
@@ -25,7 +26,7 @@ public:
 	//True: Pokemon added successfully
 	//False: Error occured while adding pokemon
 
-	deque<Pokemon> getItemCollection();
+	vector<Pokemon> getItemCollection();
 	//Function to get the ItemCollection deque
 	//Post Condition: The itemCollection is returned.
 };

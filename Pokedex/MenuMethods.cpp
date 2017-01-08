@@ -266,8 +266,6 @@ Pokemon MenuMethods::searchQuickPokemon(string search)
 
 	itemcollection = &pokedex.getItemCollection();
 
-	Pokemon foundPokemon = find_if(begin(pokedex.getItemCollection()), end(pokedex.getItemCollection()), findPokemonFunction);
-
 	Pokemon foundPokemon = find_if(pokedex.getItemCollection().begin(), pokedex.getItemCollection().end(), findPokemonFunction);
 	
 	return foundPokemon;

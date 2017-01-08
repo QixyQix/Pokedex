@@ -46,6 +46,10 @@ public:
 	void searchPokemon();
 	//Function that runs the search Pokemon wizard
 	//Post Condition: All the pokemon that match the user's search terms are displayed
+
+	void searchMenu();
+
+	Pokemon searchQuickPokemon(string search);
 	
 	void displayPokemon();
 	//Function that displays the pokemon
