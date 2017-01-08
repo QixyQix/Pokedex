@@ -256,6 +256,23 @@ void MenuMethods::searchPokemon()
 	
 }
 
+Pokemon MenuMethods::searchQuickPokemon(string search)
+{
+	auto findPokemonFunction = [search](Pokemon pokemon) {
+		return pokemon.getName().compare(search)==0;
+	};
+
+	vector<Pokemon> *itemcollection;
+
+	itemcollection = &pokedex.getItemCollection();
+
+	Pokemon foundPokemon = find_if(begin(pokedex.getItemCollection()), end(pokedex.getItemCollection()), findPokemonFunction);
+
+	Pokemon foundPokemon = find_if(pokedex.getItemCollection().begin(), pokedex.getItemCollection().end(), findPokemonFunction);
+	
+	return foundPokemon;
+}
+
 void MenuMethods::displayPokemon()
 {
 	cout << *selectedPokemon << endl;

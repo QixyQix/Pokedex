@@ -14,7 +14,7 @@ bool Pokedex::add(Pokemon& const aPokemon)
 {
 	try {
 		//Add the item to the list
-		itemCollection.push_front(aPokemon);
+		itemCollection.push_back(aPokemon);
 		return true;
 	}
 	catch (exception e) {
@@ -22,7 +22,7 @@ bool Pokedex::add(Pokemon& const aPokemon)
 	}
 }
 
-deque<Pokemon> Pokedex::getItemCollection()
+vector<Pokemon> Pokedex::getItemCollection()
 {
 	return itemCollection;
 }
