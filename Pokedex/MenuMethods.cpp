@@ -26,6 +26,16 @@ MenuMethods::MenuMethods()
 	pokedex.add(newEvolvedPokemon4);
 }
 
+void MenuMethods::searchMenu()
+{
+	int request = dataEntryInt("Search pokemon by: \n 1. Name \n 2. Category");
+	switch (request) {
+	case 1:
+		searchPokemon();
+		break;
+	}
+}
+
 void MenuMethods::createPokemon()
 {
 	bool back; //Boolean - set to true if need to repeat, false if can proceed to next step
@@ -108,170 +118,184 @@ void MenuMethods::createPokemon()
 
 }
 
-void MenuMethods::editPokemon()
+void MenuMethods::editPokemon(Pokemon *selectedPokemon)
 {
-	//Print out the name of the selected pokemon
-	cout << "Current name: " << selectedPokemon->getName() << endl;
-	//Prompt user for new name
-	string newName = dataEntryStr("Enter new name (Leave blank to skip):");
-	//Print out the description of the selected pokemon
-	cout << "Current description: " << selectedPokemon->getDescription() << endl;
-	//Prompt user for new description
-	string newDescription = dataEntryStr("Enter new description (Leave blank to skip):");
-	//Print out the weight of the selected pokemon
-	cout << "Current weight: " << selectedPokemon->getWeight() << endl;
-	double newWeight; //Double for new weight
-	double newHeight; //Double for new height
-	int newCategory; //Int for new Category
-
 	bool repeat; //Boolean for do..while
-	//Weight
-	do { //Start do..while for the weight
-		repeat = false; //Initialize the repeat as false
-		//Prompt user for new weight
-		string newWeightStr = dataEntryStr("Enter new weight in kg (Leave blank to skip)");
-		//Check if left blank
-		if (newWeightStr.compare("") == 0) 
-		{
-			newWeight = selectedPokemon->getWeight();  //Set the new weight to the original weight
-			repeat = false; //change repeat to false
-		}
-		else
-		{
-			try { //Start try catch
-				newWeight = stod(newWeightStr); //Convert user input to double
-			}
-			catch (exception e) {
-				repeat = true; //Set repet to true
-				cout << "Invalid double input" << endl;
-			} //End try catch
-		}
-	} while (repeat); //End do..while for weight
 
-	//Height
-	cout << "Current height: " << selectedPokemon->getheight() << endl;
-	do { //Start do...while for height
-		repeat = false; //initialize repeat as false
-		//Prompt user for new height
-		string newHeightStr = dataEntryStr("Enter new height in m (Leave blank to skip)");
-		//Check if left blank
-		if (newHeightStr.compare("") == 0)
-		{
-			newHeight = selectedPokemon->getheight(); //set new height to current height
-			repeat = false; //set repeat to false
+	do {
+		//Print out the name of the selected pokemon
+		cout << "Current name: " << selectedPokemon->getName() << endl;
+		//Prompt user for new name
+		string newName = dataEntryStr("Enter new name (Leave blank to skip):");
+		if (newName.compare("") == 0) {
+			newName = selectedPokemon->getName();
 		}
-		else
-		{
-			try { 
-				newHeight = stod(newHeightStr); //Try to convert the user input to  double
-			}
-			catch (exception e) {
-				repeat = true; //Set the repeat to true
-				cout << "Invalid double input" << endl;
-			}
+		//Print out the description of the selected pokemon
+		cout << "Current description: " << selectedPokemon->getDescription() << endl;
+		//Prompt user for new description
+		string newDescription = dataEntryStr("Enter new description (Leave blank to skip):");
+		if (newDescription.compare("") == 0) {
+			newDescription = selectedPokemon->getDescription();
 		}
-	} while (repeat); //end do..while for Height
+		//Print out the weight of the selected pokemon
+		cout << "Current weight: " << selectedPokemon->getWeight() << endl;
+		double newWeight; //Double for new weight
+		double newHeight; //Double for new height
+		int newCategory; //Int for new Category
+		//Weight
+		do { //Start do..while for the weight
+			repeat = false; //Initialize the repeat as false
+			//Prompt user for new weight
+			string newWeightStr = dataEntryStr("Enter new weight in kg (Leave blank to skip)");
+			//Check if left blank
+			if (newWeightStr.compare("") == 0)
+			{
+				newWeight = selectedPokemon->getWeight();  //Set the new weight to the original weight
+				repeat = false; //change repeat to false
+			}
+			else
+			{
+				try { //Start try catch
+					newWeight = stod(newWeightStr); //Convert user input to double
+				}
+				catch (exception e) {
+					repeat = true; //Set repet to true
+					cout << "Invalid double input" << endl;
+				} //End try catch
+			}
+		} while (repeat); //End do..while for weight
 
-	//Category
-	cout << "Current category: " << selectedPokemon->getCategory() << endl;
-	do { //start do...wile for category
- 		repeat = false; //initialize repeat as false
-		//Prompt user for new category
-		string newCategoryStr = dataEntryStr("Enter new category (Leave blank to skip)");
-		//Check if empty
-		if (newCategoryStr.compare("") == 0)
-		{
-			newCategory = selectedPokemon->getCategory(); //Set new category to current category
+		//Height
+		cout << "Current height: " << selectedPokemon->getheight() << endl;
+		do { //Start do...while for height
+			repeat = false; //initialize repeat as false
+			//Prompt user for new height
+			string newHeightStr = dataEntryStr("Enter new height in m (Leave blank to skip)");
+			//Check if left blank
+			if (newHeightStr.compare("") == 0)
+			{
+				newHeight = selectedPokemon->getheight(); //set new height to current height
+				repeat = false; //set repeat to false
+			}
+			else
+			{
+				try {
+					newHeight = stod(newHeightStr); //Try to convert the user input to  double
+				}
+				catch (exception e) {
+					repeat = true; //Set the repeat to true
+					cout << "Invalid double input" << endl;
+				}
+			}
+		} while (repeat); //end do..while for Height
+
+		//Category
+		cout << "Current category: " << selectedPokemon->getCategory() << endl;
+		do { //start do...wile for category
+			repeat = false; //initialize repeat as false
+			//Prompt user for new category
+			string newCategoryStr = dataEntryStr("Enter new category (Leave blank to skip)");
+			//Check if empty
+			if (newCategoryStr.compare("") == 0)
+			{
+				newCategory = selectedPokemon->getCategory(); //Set new category to current category
+				repeat = false;
+			}
+			else
+			{
+				try {
+					newCategory = stoi(newCategoryStr); //Try convert to int
+				}
+				catch (exception e) {
+					repeat = true; //Set repeat to true
+					cout << "Invalid integer input" << endl;
+				}
+			}
+		} while (repeat); //End do...while for category
+
+
+		//Summarize edits made
+		cout << "Confirm edit" << endl
+			<< "Name: " << selectedPokemon->getName() << " -> " << newName << endl
+			<< "Description: " << selectedPokemon->getDescription() << " -> " << newDescription << endl
+			<< "Height: " << selectedPokemon->getheight() << "m -> " << newHeight << "m" << endl
+			<< "Weight: " << selectedPokemon->getWeight() << "kg -> " << newWeight << "kg" << endl
+			<< "Category: " << selectedPokemon->getCategory() << " -> " << newCategory << endl;
+
+		repeat = false; //Reset the repeat
+		//Ask to confirm edits
+		int confirm = dataEntryInt("Is this correct? \n1. Yes\n2. No");
+		switch (confirm) {
+		case 1:
+			//Commit the edits
+			selectedPokemon->setName(newName);
+			selectedPokemon->setDescription(newDescription);
+			selectedPokemon->setheight(newHeight);
+			selectedPokemon->setWeight(newWeight);
+			selectedPokemon->setCategory(newCategory);
+			break;
+		case 2:
 			repeat = false;
+			break;
 		}
-		else
-		{
-			try {
-				newCategory = stoi(newCategoryStr); //Try convert to int
-			}
-			catch (exception e) {
-				repeat = true; //Set repeat to true
-				cout << "Invalid integer input" << endl;
-			}
-		}
-	} while (repeat); //End do...while for category
-
-	//Summarize edits made
-	cout << "Confirm edit" << endl
-		<< "Name: " << selectedPokemon->getName() << " -> " << newName << endl
-		<< "Description: " << selectedPokemon->getDescription() << " -> " << newDescription << endl
-		<< "Height: " << selectedPokemon->getheight() << "m -> " << newHeight << "m" << endl
-		<< "Weight: " << selectedPokemon->getWeight() << "kg -> " << newWeight << "kg" << endl
-		<< "Category: " << selectedPokemon->getCategory() << " -> " << newCategory << endl;
-	
-
+	} while (repeat);
 }
 
 void MenuMethods::searchPokemon()
 {
 	//Vector/List to store the found pokemon
-	vector<Pokemon> foundPokemon = vector<Pokemon>();
-	//Number to track the number of pokemon found
+	vector<Pokemon*> foundPokemon;
+	//vector<Pokemon> foundPokemon;
+
 	int noFound = 0;
-	//Temporary to prevent the thing form skipping this
-	dataEntryStr("");
+
 	//Get user input for search string
 	string keyword = dataEntryStr("Enter a keyword: ");
 
-	//Loop through the entire pokedex
-	for each (Pokemon aPokemon in pokedex.getItemCollection())
-	{
-		//Check if the name contains the keyword
-		if (aPokemon.getName().find(keyword) != string::npos) {
-			//Add the pokemon to the list
-			foundPokemon.push_back(aPokemon);
-			//Update the number of pokemon found
-			noFound++;
-			//Print out the pokemon.
-			cout << noFound <<". " << aPokemon.getName()<< endl;
-		}
-	}
+	//Iterate through the pokedex
+		vector<Pokemon>::iterator start = pokedex.getItemCollection()->begin();
+		vector<Pokemon>::iterator end = pokedex.getItemCollection()->end();
 
-	//Check if theres any pokemon found
-	if (noFound > 0) {
+		for (start; start != end; ++start) {
+			string name = (string)start->getName();
+			//Check if the name of the pokemon satisfys the keyword condition
+			if (name.find(keyword) != string::npos) {
+				//Assign a temporary ptr to the current iterator
+				Pokemon* theFound = &(*start);
+				//Push back into the found pokemon vector
+				foundPokemon.push_back(theFound);
+			}
+		}
+
+	//If there are found pokemons
+	if (foundPokemon.size() > 0) {
+		int noFound = 0;
+		for each (Pokemon* aPokemon in foundPokemon)
+		{
+			cout << noFound+1 << ". " << aPokemon->getName() << endl;
+			noFound++;
+		}
+
 		bool loop; //Boolean for looping
 		do { //start do...while for option
 			loop = false; //initialize as false
-			//Prompt user for pokemon index no
+						  //Prompt user for pokemon index no
 			int intSelected = dataEntryInt("Enter the number of the pokemon you would like to view: ");
 			try {
-				Pokemon selectedPokemonObj = foundPokemon.at(intSelected - 1); //Get the pokemon from the index
-				selectedPokemon = &selectedPokemonObj; //Set the pointer to it
-				displayPokemon(); //Display the pokemon
+				Pokemon *selectedPokemon = foundPokemon.at(intSelected - 1);
+				displayPokemon(selectedPokemon); //Display the pokemon
 			}
 			catch (exception e) {
 				loop = true; //loop true
 				cout << "Invalid selection. Please try again." << endl;
 			}
 		} while (loop); //End do...while for option
-	}
-	else {
+	}else{
 		cout << "No such pokemon found." << endl;
-	}
-	
+	}	
 }
 
-Pokemon MenuMethods::searchQuickPokemon(string search)
-{
-	auto findPokemonFunction = [search](Pokemon pokemon) {
-		return pokemon.getName().compare(search)==0;
-	};
-
-	vector<Pokemon> *itemcollection;
-
-	itemcollection = &pokedex.getItemCollection();
-
-	Pokemon foundPokemon = find_if(pokedex.getItemCollection().begin(), pokedex.getItemCollection().end(), findPokemonFunction);
-	
-	return foundPokemon;
-}
-
-void MenuMethods::displayPokemon()
+void MenuMethods::displayPokemon(Pokemon *selectedPokemon)
 {
 	cout << *selectedPokemon << endl;
 	//TODO EVOLUTION
@@ -297,9 +321,10 @@ void MenuMethods::displayPokemon()
 	switch (selection)
 	{
 	case 1: //Edit
-		editPokemon();
+		editPokemon(selectedPokemon);
 		break;
 	case 2: //Delete
+		deletePokemon(selectedPokemon);
 		break;
 	case 3: //Back to main Menu
 		//Nothing happens here.
@@ -307,9 +332,17 @@ void MenuMethods::displayPokemon()
 	}
 }
 
-void MenuMethods::deletePokemon()
+void MenuMethods::deletePokemon(Pokemon *selectedPokemon)
 {
-	//TODO: Delete Pokemon
+	vector<Pokemon>::iterator begin = pokedex.getItemCollection()->begin();
+	vector<Pokemon>::iterator end = pokedex.getItemCollection()->end();
+
+	for (begin; begin != end; ++begin) {
+		if (begin->getName().compare(selectedPokemon->getName()) == 0) {
+			pokedex.getItemCollection()->erase(begin);
+			break;
+		}
+	}
 }
 
 double MenuMethods::dataEntry(string const question)
@@ -391,14 +424,19 @@ string MenuMethods::dataEntryStr(string const question)
 
 bool MenuMethods::ifExists(string const pokemonName)
 {
-	//For each pokemon in the pokedex
-	for each (Pokemon aPokemon in pokedex.getItemCollection())
-	{
-		//Return true if the name equal
-		if (aPokemon.getName().compare(pokemonName) == 0)
-
-			return true;
+	for (vector<Pokemon>::iterator it = pokedex.getItemCollection()->begin(); it != pokedex.getItemCollection()->end(); ++it) {
+		//	//Return true if the name equal
+			if (it->getName().compare(pokemonName) == 0)
+				return true;
 	}
+	////For each pokemon in the pokedex
+	//for each (Pokemon aPokemon in pokedex.getItemCollection())
+	//{
+	//	//Return true if the name equal
+	//	if (aPokemon.getName().compare(pokemonName) == 0)
+
+	//		return true;
+	//}
 	return false; //return false if does not exist
 }
 

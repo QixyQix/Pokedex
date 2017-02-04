@@ -22,7 +22,7 @@ bool Pokedex::add(Pokemon& const aPokemon)
 	}
 }
 
-vector<Pokemon> Pokedex::getItemCollection()
+vector<Pokemon>* Pokedex::getItemCollection()
 {
-	return itemCollection;
+	return &itemCollection;
 }

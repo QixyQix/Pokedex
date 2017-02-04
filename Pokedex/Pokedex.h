@@ -26,7 +26,7 @@ public:
 	//True: Pokemon added successfully
 	//False: Error occured while adding pokemon
 
-	vector<Pokemon> getItemCollection();
+	vector<Pokemon>* getItemCollection();
 	//Function to get the ItemCollection deque
 	//Post Condition: The itemCollection is returned.
 };

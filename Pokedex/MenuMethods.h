@@ -14,7 +14,6 @@ class MenuMethods
 {
 private:
 	Pokedex pokedex; //Variable to store the pokedex object
-	Pokemon *selectedPokemon; //Variable to store the selected pokemon pointer
 public:
 	MenuMethods();
 	//Default Constructor
@@ -35,27 +34,25 @@ public:
 	//Function for that checks if the pokemon exists in the Pokedex itemCollection
 	//Post Condition: Returns true if the pokemon exists in the pokedex
 
+	void searchMenu();
+
 	void createPokemon();
 	//Function that runs the create pokemon wizard
 	//Post Condition: A new Pokemon is created and added to the itemCollection deque
 
-	void editPokemon();
+	void editPokemon(Pokemon *selectedPokemon);
 	//Function that runs the edit Pokemon wizard
 	//Post Condition: The pokemon is edited
 
 	void searchPokemon();
 	//Function that runs the search Pokemon wizard
 	//Post Condition: All the pokemon that match the user's search terms are displayed
-
-	void searchMenu();
-
-	Pokemon searchQuickPokemon(string search);
 	
-	void displayPokemon();
+	void displayPokemon(Pokemon *selectedPokemon);
 	//Function that displays the pokemon
 	//Post Condition: The pokemon's details are displayed
 
-	void deletePokemon();
+	void deletePokemon(Pokemon *selectedPokemon);
 	//Function that deletes the pokemon
 	//Post Condition: The selected pokemon is removed from pokedex itemcollection
 

@@ -41,7 +41,7 @@ void main() {
 		switch (inputConvert)
 		{
 		case 1: //Search for pokemon program
-			methods.searchPokemon();
+			methods.searchMenu();
 			break;
 		case 2: //Create new pokemon program
 			methods.createPokemon();
