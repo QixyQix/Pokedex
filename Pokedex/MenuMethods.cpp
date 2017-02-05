@@ -2,36 +2,67 @@
 
 MenuMethods::MenuMethods()
 {
-	//Create test data
+	//Declare the in file
+	ifstream inFile;
+	//Open the file
+	inFile.open("PokemonData.txt");
+	//while it is not the end of file
+	while (!inFile.eof()) {
+		//Declare variables needed
+		string line;
+		string name;
+		string desc;
+		string heightStr;
+		string weightStr;
+		double height;
+		double weight;
+		string categoryStr;
+		int category;
+		string evolvedFrom;
 
-	Pokemon newPokemon1 = Pokemon(1.0, 1.0, "Alphy", "Test Pokemon Alpha", 1);
-	Pokemon newPokemon2 = Pokemon(2.0, 2.0, "Bety", "Test Pokemon Bety", 2);
-	Pokemon newPokemon3 = Pokemon(3.0, 3.0, "Charlie", "Test Pokemon Charlie", 3);
-	Pokemon newPokemon4 = Pokemon(4.0, 4.0, "Delta", "Test Pokemon Delta", 3);
+		//get the line
+		getline(inFile, name);
+		//check if it marks the end of the file
+		if (name.compare("END") != 0) {
+			getline(inFile, desc); //Get the description
+			getline(inFile, heightStr); //Get the height
+			getline(inFile, weightStr); //Get the weight
+			getline(inFile, categoryStr); //Get the category
+			getline(inFile, evolvedFrom); //Get the evolved from
 
-	EvolvedPokemon newEvolvedPokemon1 = EvolvedPokemon(1.1, 1.1, "Ace", "Test evolved pokemon alpha",1,"Alphy");
-	EvolvedPokemon newEvolvedPokemon2 = EvolvedPokemon(2.2,2.2, "Betsy", "Test evolvedS pokemon alpha", 1, "Bety");
-	EvolvedPokemon newEvolvedPokemon3 = EvolvedPokemon(3.3,3.3, "Charred Charlie", "Test evolved pokemon Charlie", 1, "Charlie");
-	EvolvedPokemon newEvolvedPokemon4 = EvolvedPokemon(1.1, 1.1, "Darling", "Test evolved pokemon Delta", 1, "Delta");
+			//Convert to the types
+			height = stod(heightStr);
+			weight = stod(weightStr);
+			category = stoi(categoryStr);
 
-	//Add the test data into the pokedex
-	pokedex.add(newPokemon1);
-	pokedex.add(newPokemon2);
-	pokedex.add(newPokemon3);
-	pokedex.add(newPokemon4);
-
-	pokedex.add(newEvolvedPokemon1);
-	pokedex.add(newEvolvedPokemon2);
-	pokedex.add(newEvolvedPokemon3);
-	pokedex.add(newEvolvedPokemon4);
+			if (evolvedFrom.compare("==") == 0) {
+				pokedex.add(Pokemon(height, weight, name, desc, category));
+			}
+			else {
+				pokedex.add(EvolvedPokemon(height, weight, name, desc, category, evolvedFrom));
+				getline(inFile, line);
+			}
+		}
+		else {
+			break;
+		}
+	}
+	inFile.close();
+	sortPokedex();
 }
 
 void MenuMethods::searchMenu()
 {
-	int request = dataEntryInt("Search pokemon by: \n 1. Name \n 2. Category");
+	int request = dataEntryInt("Search pokemon by: \n 1. Name \n 2. Weight");
 	switch (request) {
 	case 1:
 		searchPokemon();
+		break;
+	case 2:
+		cout << "Search pokemon between 2 weights" << endl;
+		double lightest = dataEntry("Enter the lightest");
+		double heaviest = dataEntry("Enter the heaviest");
+		searchPokemon(lightest, heaviest);
 		break;
 	}
 }
@@ -115,6 +146,7 @@ void MenuMethods::createPokemon()
 		cout << "Pokemon " << name << " created successfully." << endl;
 	}
 	
+	sortPokedex();
 
 }
 
@@ -213,6 +245,16 @@ void MenuMethods::editPokemon(Pokemon *selectedPokemon)
 			}
 		} while (repeat); //End do...while for category
 
+		//evolvedFrom
+		string newEvolvedFrom;
+		cout << "Current evolvedFrom: " << selectedPokemon->getEvolvedFrom() << endl;
+		bool exists;
+		do {
+			newEvolvedFrom = dataEntryStr("Enter new evolvedFrom (Leave blank to remove):");
+			exists = ifExists(newEvolvedFrom);
+			if (!exists)
+				cout << "Pokemon does not exist" << endl;
+		} while (!exists);
 
 		//Summarize edits made
 		cout << "Confirm edit" << endl
@@ -220,7 +262,8 @@ void MenuMethods::editPokemon(Pokemon *selectedPokemon)
 			<< "Description: " << selectedPokemon->getDescription() << " -> " << newDescription << endl
 			<< "Height: " << selectedPokemon->getheight() << "m -> " << newHeight << "m" << endl
 			<< "Weight: " << selectedPokemon->getWeight() << "kg -> " << newWeight << "kg" << endl
-			<< "Category: " << selectedPokemon->getCategory() << " -> " << newCategory << endl;
+			<< "Category: " << selectedPokemon->getCategory() << " -> " << newCategory << endl
+			<< "Evolved From: " << selectedPokemon->getEvolvedFrom() << " -> " << newEvolvedFrom << endl;
 
 		repeat = false; //Reset the repeat
 		//Ask to confirm edits
@@ -228,17 +271,31 @@ void MenuMethods::editPokemon(Pokemon *selectedPokemon)
 		switch (confirm) {
 		case 1:
 			//Commit the edits
-			selectedPokemon->setName(newName);
-			selectedPokemon->setDescription(newDescription);
-			selectedPokemon->setheight(newHeight);
-			selectedPokemon->setWeight(newWeight);
-			selectedPokemon->setCategory(newCategory);
+			//If it is a pokemon object and theres no changes to evolvedfrom
+			if (selectedPokemon->getEvolvedFrom().compare("") == 0 && newEvolvedFrom.compare("") == 0) {
+				selectedPokemon->edit(newHeight, newWeight, newName, newDescription, newCategory,string());
+			}
+			//if it is a evolvdpokemon object and there are changes to evolvedfrom
+			else if (selectedPokemon->getEvolvedFrom().compare("") != 0 && newEvolvedFrom.compare("") != 0) {
+				selectedPokemon->edit(newHeight, newWeight, newName, newDescription, newCategory, newEvolvedFrom);
+			}
+			//if it is a pokemon object and there evolvedfrom is added
+			else if (selectedPokemon->getEvolvedFrom().compare("") == 0 && newEvolvedFrom.compare("") != 0) {
+				deletePokemon(selectedPokemon);
+				pokedex.add(EvolvedPokemon(newHeight, newWeight, newName, newDescription, newCategory, newEvolvedFrom));
+			}
+			//if it is a pokemon object and there is an added evolvedfrom (change to evolvedpokemon)
+			else if (selectedPokemon->getEvolvedFrom().compare("") != 0 && newEvolvedFrom.compare("") == 0) {
+				deletePokemon(selectedPokemon);
+				pokedex.add(Pokemon(newHeight, newWeight, newName, newDescription, newCategory));
+			}
 			break;
 		case 2:
 			repeat = false;
 			break;
 		}
 	} while (repeat);
+	sortPokedex();
 }
 
 void MenuMethods::searchPokemon()
@@ -295,6 +352,55 @@ void MenuMethods::searchPokemon()
 	}	
 }
 
+void MenuMethods::searchPokemon(double const lightest, double const heaviest)
+{
+	//Vector/List to store the found pokemon
+	vector<Pokemon*> foundPokemon;
+
+	int noFound = 0;
+
+	//Iterate through the pokedex
+	vector<Pokemon>::iterator start = pokedex.getItemCollection()->begin();
+	vector<Pokemon>::iterator end = pokedex.getItemCollection()->end();
+
+	for (start; start != end; ++start) {
+		if (start->getWeight() > lightest && start->getWeight() < heaviest) {
+			//Assign a temporary ptr to the current iterator
+			Pokemon* theFound = &(*start);
+			//Push back into the found pokemon vector
+			foundPokemon.push_back(theFound);
+		}
+	}
+
+	//If there are found pokemons
+	if (foundPokemon.size() > 0) {
+		int noFound = 0;
+		for each (Pokemon* aPokemon in foundPokemon)
+		{
+			cout << noFound + 1 << ". " << aPokemon->getName() << endl;
+			noFound++;
+		}
+
+		bool loop; //Boolean for looping
+		do { //start do...while for option
+			loop = false; //initialize as false
+						  //Prompt user for pokemon index no
+			int intSelected = dataEntryInt("Enter the number of the pokemon you would like to view: ");
+			try {
+				Pokemon *selectedPokemon = foundPokemon.at(intSelected - 1);
+				displayPokemon(selectedPokemon); //Display the pokemon
+			}
+			catch (exception e) {
+				loop = true; //loop true
+				cout << "Invalid selection. Please try again." << endl;
+			}
+		} while (loop); //End do...while for option
+	}
+	else {
+		cout << "No such pokemon found." << endl;
+	}
+}
+
 void MenuMethods::displayPokemon(Pokemon *selectedPokemon)
 {
 	cout << *selectedPokemon << endl;
@@ -340,6 +446,7 @@ void MenuMethods::deletePokemon(Pokemon *selectedPokemon)
 	for (begin; begin != end; ++begin) {
 		if (begin->getName().compare(selectedPokemon->getName()) == 0) {
 			pokedex.getItemCollection()->erase(begin);
+			sortPokedex();
 			break;
 		}
 	}
@@ -438,6 +545,77 @@ bool MenuMethods::ifExists(string const pokemonName)
 	//		return true;
 	//}
 	return false; //return false if does not exist
+}
+
+bool sortByName(const Pokemon &lhs, const Pokemon &rhs)
+{
+	return lhs.getName() < rhs.getName();
+}
+
+void MenuMethods::sortPokedex()
+{
+	sort(pokedex.getItemCollection()->begin(), pokedex.getItemCollection()->end(), sortByName);
+	writeDataFile();
+}
+
+void MenuMethods::writeDataFile()
+{
+	ofstream outFile;
+	outFile.open("PokemonData.txt");
+	
+	vector<Pokemon>::iterator it = pokedex.getItemCollection()->begin();
+	vector<Pokemon>::iterator end = pokedex.getItemCollection()->end();
+
+	for (it; it != end; ++it) 
+	{
+		outFile << it->getName() << endl;
+		outFile << it->getDescription() << endl;
+		outFile << it->getheight() << endl;
+		outFile << it->getWeight() << endl;
+		outFile << it->getCategory() << endl;
+
+		string evolvedFrom = it->getEvolvedFrom();
+		if (evolvedFrom.compare("") == 0) {
+			outFile << "==" << endl;
+		}
+		else {
+			outFile << evolvedFrom << endl;
+			outFile << "==" << endl;
+		}
+	}
+	outFile << "END" << endl;
+}
+
+string MenuMethods::getEvolution(Pokemon const * selectedPokemon)
+{
+	string first;
+	string second;
+	string third;
+
+	vector<string> seconds;
+
+	vector<Pokemon>::iterator it = pokedex.getItemCollection()->begin();
+	vector<Pokemon>::iterator end = pokedex.getItemCollection()->end();
+	//If there is no evoution, we can assume it is the first in the evolution string.
+	if (selectedPokemon->getEvolvedFrom().compare("") == 0) {
+		first = selectedPokemon->getName();
+		for (it; it != end; ++it) {
+			if (it->getEvolvedFrom().compare(first) == 0) {
+				second = it->getName();
+				break;
+			}
+		}
+		for (it = pokedex.getItemCollection()->begin(); it != end; ++it) {
+			if (it->getEvolvedFrom().compare(second) == 0) {
+				third = it->getName();
+				break;
+			}
+		}
+	}
+	else {
+		
+	}
+	return string();
 }
 
 MenuMethods::~MenuMethods()

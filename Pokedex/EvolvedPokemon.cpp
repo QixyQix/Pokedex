@@ -40,3 +40,21 @@ void EvolvedPokemon::setEvolvedFrom(string & e)
 {
 	evolvedFrom = e;
 }
+
+ostream & operator<<(ostream & osObject, const EvolvedPokemon & aPokemon)
+{
+	//Print out the name
+	osObject << "=== " << aPokemon.getName() << " ===" << endl;
+	//Print out the description
+	osObject << "Description: " << endl << aPokemon.getDescription() << endl;
+	//Print out the category
+	osObject << "Category: " << aPokemon.getCategory() << endl;
+	//Print out the Height
+	osObject << "Height: " << aPokemon.getheight() << endl;
+	//Print out the Weight
+	osObject << "Weight: " << aPokemon.getWeight() << endl;
+	//Print out the evolution
+	osObject << "Evolved from: " << aPokemon.getEvolvedFrom() << endl;
+
+	return osObject;
+}

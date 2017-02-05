@@ -98,11 +98,11 @@ string Pokemon::getEvolvedFrom() const
 	return "";
 }
 
-void Pokemon::setEvolvedFrom()
+void Pokemon::setEvolvedFrom(string &pokemonName)
 {
 }
 
-void Pokemon::edit(double & h, double & w, string & n, string & d, int& c)
+void Pokemon::edit(double & h, double & w, string & n, string & d, int& c, string &e)
 {
 	height = h; //Set height
 	weight = w; //Set weight

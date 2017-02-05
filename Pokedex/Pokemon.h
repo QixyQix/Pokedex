@@ -77,10 +77,10 @@ public:
 	//Function to get the Pokemon's evolvedFrom
 	//Post Condition: Returns ""
 
-	virtual void setEvolvedFrom();
+	virtual void setEvolvedFrom(string& pokemonName);
 	//Function to set the Pokemon's evolvedFrom
 
-	virtual void edit(double &h, double &w,string &n, string &d, int& c);
+	virtual void edit(double &h, double &w,string &n, string &d, int& c, string& e);
 	//Function to edit the pokemon
 	//Post Condition: height = h, weight = w, name = n, description = d, category = c
 
