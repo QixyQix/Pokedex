@@ -54,6 +54,8 @@ public:
 
 	void searchPokemon(double const lightest, double const heaviest);
 	//Function that search for pokemons inbwetteen lightest and heaviest
+	//Pre Condition: The pokedex must have been instantialized and populated
+	//Post Condition: Pokemons within the range are returned
 
 	
 	void displayPokemon(Pokemon *selectedPokemon);
@@ -75,8 +77,6 @@ public:
 	//Function that write the pokedex item collection to the txt file
 	//Pre Condition: The pokedex must have been created and populated with Pokemon or EvolvedPokemon objects
 	//Post Condition: The PokemonData.txt file is overwritten with the pokemon detais from the itemcollection
-
-	string getEvolution(Pokemon const *selectedPokemon);
 
 	~MenuMethods();
 	//Default Destructor

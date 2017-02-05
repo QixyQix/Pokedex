@@ -1,22 +1,35 @@
+Blastoise
+Blastoise has water spouts that protrude from its shell. The water spouts are very accurate. They can shoot bullets of water with enough accuracy to strike empty cans from a distance of over 160 feet.
+5
+188
+3
+Wartortle
+==
 Bulbasaur
 Onion bulb
 1
 10
 1
 ==
-Ivysaur
-Onion bulb with flower
-1.5
-11
-1
-Bulbasaur
+Butterfree
+Butterfree has a superior ability to search for delicious honey from flowers. It can even search out, extract, and carry honey from flowers that are blooming over six miles from its nest.
+3
+70
+4
+Metapod
 ==
-Venusaur
-kai hua liao
-1.6
-15
+Caterpie
+Caterpie has a voracious appetite. It can devour leaves bigger than its body right before your eyes. From its antenna, this Pok‚mon releases a terrifically strong odor.
 1
-Ivysaur
+6.4
+4
+==
+Charizard
+Charizard flies around the sky in search of powerful opponents. It breathes fire of such great heat that it melts anything. However, it never turns its fiery breath on any opponent weaker than itself.
+5
+199
+2
+Charmeleon
 ==
 Charmander
 The flame that burns at the tip of its tail is an indication of its emotions. The flame wavers when Charmander is enjoying itself. If the Pok‚mon becomes enraged, the flame burns fiercely.
@@ -26,17 +39,24 @@ The flame that burns at the tip of its tail is an indication of its emotions. Th
 ==
 Charmeleon
 Charmeleon mercilessly destroys its foes using its sharp claws. If it encounters a strong foe, it turns aggressive. In this excited state, the flame at the tip of its tail flares with a bluish white color.
-3.7
-41.9
+3
+41
 2
 Charmander
 ==
-Charizard
-Charizard flies around the sky in search of powerful opponents. It breathes fire of such great heat that it melts anything. However, it never turns its fiery breath on any opponent weaker than itself.
-5.07
-199.5
+Ivysaur
+Onion bulb with flower
+1
+11
+1
+Bulbasaur
+==
+Metapod
+The shell covering this Pok‚mon's body is as hard as an iron slab. Metapod does not move very much. It stays still because it is preparing its soft innards for evolution inside the hard shell.
 2
-Charmeleon
+21
+4
+Caterpie
 ==
 Squirtle
 Squirtle's shell is not merely used for protection. The shell's rounded shape and the grooves on its surface help minimize resistance in water, enabling this Pok‚mon to swim at high speeds.
@@ -44,36 +64,31 @@ Squirtle's shell is not merely used for protection. The shell's rounded shape an
 19.8
 3
 ==
+Testing
+Testing
+1
+2
+3
+Blastoise
+==
+Testing
+Testing
+1
+2
+3
+==
+Venusaur
+kai hua liao
+1
+15
+1
+Ivysaur
+==
 Wartortle
 Its tail is large and covered with a rich, thick fur. The tail becomes increasingly deeper in color as Wartortle ages. The scratches on its shell are evidence of this Pok‚mon's toughness as a battler.
-3.03
-49.6
+3
+49
 3
 Squirtle
 ==
-Blastoise
-Blastoise has water spouts that protrude from its shell. The water spouts are very accurate. They can shoot bullets of water with enough accuracy to strike empty cans from a distance of over 160 feet.
-5.03
-188.5
-3
-Wartortle
-==
-Caterpie
-Caterpie has a voracious appetite. It can devour leaves bigger than its body right before your eyes. From its antenna, this Pok‚mon releases a terrifically strong odor.
-1
-6.4
-4
-==
-Metapod
-The shell covering this Pok‚mon's body is as hard as an iron slab. Metapod does not move very much. It stays still because it is preparing its soft innards for evolution inside the hard shell.
-2.04
-21.8
-4
-Caterpie
-==
-Butterfree
-Butterfree has a superior ability to search for delicious honey from flowers. It can even search out, extract, and carry honey from flowers that are blooming over six miles from its nest.
-3.07
-70.5
-4
-Metapod
+END

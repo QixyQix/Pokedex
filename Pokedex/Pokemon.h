@@ -79,10 +79,13 @@ public:
 
 	virtual void setEvolvedFrom(string& pokemonName);
 	//Function to set the Pokemon's evolvedFrom
+	//Pre condition: pokemonName cannot be null
+	//Post Condition: Nothing happens.
 
 	virtual void edit(double &h, double &w,string &n, string &d, int& c, string& e);
 	//Function to edit the pokemon
 	//Post Condition: height = h, weight = w, name = n, description = d, category = c
+
 
 };
 

@@ -123,7 +123,6 @@ ostream & operator<<(ostream & osObject, const Pokemon & aPokemon)
 	osObject << "Height: " << aPokemon.height << endl;
 	//Print out the Weight
 	osObject << "Weight: " << aPokemon.weight << endl;
-	//TODO: EVOLUTION
 
 	return osObject;
 }

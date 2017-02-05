@@ -6,13 +6,14 @@
 #include <vector>
 #include <algorithm>
 #include "Pokemon.h"
+#include "EvolvedPokemon.h"
 
 using namespace std;
 
 class Pokedex
 {
 private:
-	vector<Pokemon> itemCollection;
+	vector<Pokemon*> itemCollection;
 public:
 	Pokedex();
 	//Constructor
@@ -20,13 +21,7 @@ public:
 	~Pokedex();
 	//Desctructor
 
-	bool add(Pokemon& const aPokemon);
-	//Function that adds a pokemon into the itemcollection collection.
-	//Returns a true/false
-	//True: Pokemon added successfully
-	//False: Error occured while adding pokemon
-
-	vector<Pokemon>* getItemCollection();
+	vector<Pokemon*>* getItemCollection();
 	//Function to get the ItemCollection deque
 	//Post Condition: The itemCollection is returned.
 };
